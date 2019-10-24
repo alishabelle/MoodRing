@@ -26,7 +26,7 @@
 				//looping through the data
 				for (var m = 0; m < data.length; m++)
 				{
-					var colorMood = data[m].color_mood;
+					var colorMood = data[m].color_hexcode/color_mood;
 				
 					// append at html
 					html += "<tr>";
@@ -35,7 +35,6 @@
 				}
 
 				// replaceing the <tbody> of <tabke>
-				document.getElementById("data").innerHTML = html;
-		
+				document.getElementById("color_hexcode/color_mood").innerHTML = html;
 };
 </script>

@@ -4,7 +4,7 @@
 $conn = mysqli_connect("local host", "root", "", "u286910301_colors_moods");
 
 //getting data from colormood table
-$result = mysql_query($conn, "SELECT * FROM ColorMood where color_hexcode =" ();
+$result = mysql_query($conn, "SELECT * FROM ColorMood");
 
 //storing in array
 $data = array();
