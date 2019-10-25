@@ -1,18 +1,27 @@
 <?php
 
 //getting data from database
-$conn = mysqli_connect("local host", "root", "", "u286910301_colors_moods");
-
+$conn = mysqli_connect("localhost", "root", "root", "u286910301_colors_moods");
+    
+//    if($conn){
+//        echo("It works");
+//    }else{
+//        echo("throw error: " . mysqli_connect_error());
+//    }
 //getting data from colormood table
-$result = mysql_query($conn, "SELECT * FROM ColorMood");
+$result = mysqli_query($conn, "SELECT * FROM ColorMood");
 
+    
 //storing in array
 $data = array();
-while ($row = mysql_fetch_assoc($result))
+while ($row = mysqli_fetch_assoc($result))
 {
-	$data[] = $row;
+//	$data[] = $row;
+    echo($row["color_name"] . "<br>");
 }
 
 //returning response in JSON format
-echo json_encode($data);
+//echo json_encode($data);
+    
+?>
 

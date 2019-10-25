@@ -181,6 +181,10 @@ main>canvas {
     animation-duration: 9s;
 }
 
+#result{
+    display:none;
+}
+
 @keyframes animate {
     0% {
         transform: translateY(0) rotate(0deg);

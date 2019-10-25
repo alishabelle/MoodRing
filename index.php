@@ -1,40 +1,112 @@
+<?php
+    //getting data from database
+    $conn = mysqli_connect("localhost", "root", "root", "u286910301_colors_moods");
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-//getting data from phpMyAdmin
+<head>
+    <meta charset="UTF-8">
+    <title>mr</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.1/pure-min.css'>
+    <link rel="stylesheet" href="./style.css">
 
-<script>
-	//call ajax
-	var ajax = new XMLHttpRequest();	
-	var method = "GET";
-	var url = "data.php"
-	var asynchronus = true;
+</head>
 
-	ajax.open(method, url, asynchronus);
+<body>
+    <?php
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $moodColor = $_POST["result"];
+            
+            $sql = "SELECT * FROM ColorMood ";
+            $sql .= "WHERE color_name = '{$moodColor}'";
+            
+            $result = mysqli_query($conn, $sql);
+            
+            while ($row = mysqli_fetch_assoc($result))
+            {
+            //    $data[] = $row;
+                echo($row["color_moods"] . "<br>");
+            }
+        }
+    ?>
+    <!-- partial:index.partial.html -->
+    <div class='header'>
+        <nav class="home-menu pure-menu pure-menu-horizontal">
+            <a href="#">
+                <h1 class="logo pure-menu-heading">mood ring</h1>
+            </a>
+        </nav>
+    </div>
 
-	//sending ajax
-	ajax.send();
+    <div class="splash-container">
+        <div class="splash">
 
-	//receiving response from data.php
-	ajax.onreadystatechange = function() {
-    if (this.readyState = 4 && this.status 200) {
-				//converting JSON back to array
-				var data = JSON.parse(this.responseText);
-				console.log(data); // for debugging
+            <aside class="splash-subhead">
 
-				//html value for <tbody>
-				var html = "";
+                <p id="blurb">Pick <strong><span id="color-type">two colors</span></strong> that represent how you’re feeling</p>
 
-				//looping through the data
-				for (var m = 0; m < data.length; m++)
-				{
-					var colorMood = data[m].color_hexcode/color_mood;
-				
-					// append at html
-					html += "<tr>";
-						html +="<td>" + colorMood + "</td>";
-					html += "</tr>";
-				}
+                <input type="radio" name="colorPicker" value="primary" id="r0">
+                <label for="r0">
+        <button  id='primary-button' class='pure-button button-smol'>              
+          <span class='dot'></span>
+          <span id="primary-color">Primary</span>
+        </button>
+      </label>
 
-				// replaceing the <tbody> of <tabke>
-				document.getElementById("color_hexcode/color_mood").innerHTML = html;
-};
-</script>
+
+                <input type="radio" name="colorPicker" value="secondary" id="r1">
+                <label for="r1">
+        <button class='pure-button button-smol'>
+          <span class='dot'></span>
+          <span id='secondary-color'>Secondary</span>
+        </button>
+      </label>
+                
+    
+<form action="index.php" method = "POST" >
+    <textarea name="result" id='result' rows="0" cols="0">
+    </textarea>
+   <input type="submit" value="Tell me my color mood!" />
+</form>
+
+
+
+                <button class='pure-button button-smol' name="result">
+        <span class='dot'></span>
+        <span id='blended-color'>Result</span>
+      </button>
+
+                <button id='blend-button' class='pure-button button-yuge'>Blend</button>
+
+            </aside>
+
+            <main>
+                <canvas id="picker" width="400" height="400">
+      </canvas>
+                <canvas id="picker-container" width="400" height="400">
+      </canvas>
+            </main>
+
+        </div>
+        <div class="background-circles">
+            <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
