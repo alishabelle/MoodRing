@@ -1,13 +1,36 @@
-$(function() {
-  var primaryColor = "#000000", secondaryColor = "#000000", blendedColor = "#000000";
-  let canvas = document.getElementById('picker');
-  let context = canvas.getContext("2d");
-  
-  function drawCircle() {
-    let radius = canvas.width / 2 - 1;
-    let image = context.createImageData(2*radius, 2*radius);
-    let data = image.data;
+var primaryColor = "#000000",
+  secondaryColor = "#000000",
+  blendedColor = "#000000",
+  currentMood = "it worked!",
+  moodBlurb = "Lorem ipsum dolor sit amet consectetur adipisicing elit.Nemo unde numquam neque non. Possimus illo, deserunt sapiente architecto sunt aut tenetur non ea in est nihil nisi, porro doloribus amet!";
 
+$(function () {
+
+  let colorsCanvas = document.getElementById("picker-colors");
+  let colorsContext = colorsCanvas.getContext("2d");
+
+  let borderCanvas = document.getElementById("picker-border");
+  let borderContext = borderCanvas.getContext("2d");
+
+  window.addEventListener('resize', dynamicCircle, false);
+
+  function dynamicCircle() {
+    // resize our canvas elements and redraw color wheel
+    let colorPicker = document.getElementById("picker");
+    let size = colorPicker.offsetWidth;
+    $(colorPicker).height(size);
+    colorsCanvas.width = size;
+    colorsCanvas.height = size;
+    borderCanvas.width = size;
+    borderCanvas.height = size;
+
+    drawCircle();
+  }
+
+  function drawCircle() {
+    let radius = colorsCanvas.width / 2 - 1;
+    let image = colorsContext.createImageData(2 * radius, 2 * radius);
+    let data = image.data;
     for (let x = -radius; x < radius; x++) {
       for (let y = -radius; y < radius; y++) {
 
@@ -22,7 +45,7 @@ $(function() {
         let deg = rad2deg(phi);
 
         // Figure out the starting index of this pixel in the image data array.
-        let rowLength = 2*radius;
+        let rowLength = 2 * radius;
         let adjustedX = x + radius; // convert x from [-50, 50] to [0, 100] (the coordinates of the image data array)
         let adjustedY = y + radius; // convert y from [-50, 50] to [0, 100] (the coordinates of the image data array)
         let pixelWidth = 4; // each pixel requires 4 slots in the data array
@@ -30,40 +53,37 @@ $(function() {
 
         let hue = deg;
         let saturation = 1.0;
-        let value = 1.0;
+        let value = 1.0
 
         let [red, green, blue] = hsv2rgb(hue, saturation, value);
         let alpha = 255;
 
         data[index] = red;
-        data[index+1] = green;
-        data[index+2] = blue;
-        data[index+3] = alpha;
+        data[index + 1] = green;
+        data[index + 2] = blue;
+        data[index + 3] = alpha;
       }
     }
-    context.putImageData(image, 0, 0);
+    colorsContext.putImageData(image, 0, 0);
 
     //white inner and outter circles
-    let containerCanvas = document.getElementById("picker-container");
-    var containerContext = containerCanvas.getContext("2d");
-    let containerRadius = containerCanvas.width / 2;
-    containerContext.beginPath();
-    containerContext.strokeStyle = "white";
-    containerContext.lineWidth = 5;
-    containerContext.arc(containerCanvas.width / 2.0, containerCanvas.height / 2, containerRadius - containerContext.lineWidth / 2, 0, 2 * Math.PI);
-    //containerContext.shadowColor = "rgba(0, 0, 0, 0.3)";
-    //containerContext.shadowBlur = 7;
-    //containerContext.shadowOffsetX = 0;
-    //containerContext.shadowOffsetY = 2;
+    let borderRadius = borderCanvas.width / 2;
 
-    containerContext.stroke();
-    containerContext.beginPath();
-    containerContext.arc(containerCanvas.width / 2, containerCanvas.height / 2, containerRadius / 2.25, 0, 2 * Math.PI);
-    containerContext.stroke();
+    //outer white border
+    borderContext.beginPath();
+    borderContext.strokeStyle = "white";
+    borderContext.lineWidth = 5;
+    borderContext.arc(borderCanvas.width / 2, borderCanvas.height / 2, borderRadius - borderContext.lineWidth / 2, 0, 2 * Math.PI);
+    borderContext.stroke();
+
+    //inner white border
+    borderContext.beginPath();
+    borderContext.arc(borderCanvas.width / 2, borderCanvas.height / 2, borderRadius / 2.25, 0, 2 * Math.PI);
+    borderContext.stroke();
   }
 
   function xy2polar(x, y) {
-    let r = Math.sqrt(x*x + y*y);
+    let r = Math.sqrt(x * x + y * y);
     let phi = Math.atan2(y, x);
     return [r, phi];
   }
@@ -74,9 +94,10 @@ $(function() {
     return ((rad + Math.PI) / (2 * Math.PI)) * 360;
   }
 
+  // pre-populate provided list of color names with appended RGB & HSL values
+  // parameter: array of arrays, format [[000000, "Color Name"], ...]
   function initColorNames(namesArray) {
-    var color, rgb, hsl;
-    for(var i = 0; i < namesArray.length; i++) {
+    for (var i = 0; i < namesArray.length; i++) {
       let color = "#" + namesArray[i][0];
       let rgb = hex2rgb(color);
       let hsl = hex2hsl(color);
@@ -84,83 +105,81 @@ $(function() {
     }
   }
 
-  //function colorBlend(hexColor1, hexColor2) {
-  // returns string formatted as hex code
-  //let rgbColor1 = hex2rgb(hexColor1);
-
-  //console.log("1 hex: " + hexColor1 + " rgb: " + rgbColor1);
-
-  //let rgbColor2 = hex2rgb(hexColor2);
-
-  //console.log("2 hex: " + hexColor2 + " rgb: " + rgbColor2);
-
-  // let percentage = 0.5;
-  // let blendedColor = [ 
-  //   Math.round(1 - percentage) * rgbColor1[0] + percentage * rgbColor1[0],
-  // Math.round(1 - percentage) * rgbColor1[1] + percentage * rgbColor2[1], 
-  // Math.round((1 - percentage) * rgbColor1[2] + percentage * rgbColor2[2])
-  // ];
-
-  // console.log("blend hex: " + rgb2hex(blendedColor[0], blendedColor[1], blendedColor[2]).toUpperCase() + " rgb: " + blendedColor);
-
-  //return rgb2hex(blendedColor[0], blendedColor[1], blendedColor[2]);
-  //}
-
-
+  // blend two hex color values and return blended hex
+  // parameters & return: string hex value, format "#000000" 
   function colorBlend(hexColor1, hexColor2) {
     // returns string formatted as hex code
     let rgbColor1 = hex2rgb(hexColor1);
 
-    console.log("1 hex: " + hexColor1 + " rgb: " + rgbColor1);
+    //console.log("1 hex: " + hexColor1 + " rgb: " + rgbColor1);
 
     let rgbColor2 = hex2rgb(hexColor2);
 
-    console.log("2 hex: " + hexColor2 + " rgb: " + rgbColor2);
+    //console.log("2 hex: " + hexColor2 + " rgb: " + rgbColor2);
 
     let percentage = 0.5;
-    let blendedColor = [ 
+    let blendedColor = [
       Math.round((1 - percentage) * rgbColor1[0] + percentage * rgbColor2[0]),
-      Math.round((1 - percentage) * rgbColor1[1] + percentage * rgbColor2[1]), 
+      Math.round((1 - percentage) * rgbColor1[1] + percentage * rgbColor2[1]),
       Math.round((1 - percentage) * rgbColor1[2] + percentage * rgbColor2[2])
     ];
 
-    console.log("blend hex: " + rgb2hex(blendedColor[0], blendedColor[1], blendedColor[2]).toUpperCase() + " rgb: " + blendedColor);
+    //console.log("blend hex: " + rgb2hex(blendedColor[0], blendedColor[1], blendedColor[2]).toUpperCase() + " rgb: " + blendedColor);
 
     return rgb2hex(blendedColor[0], blendedColor[1], blendedColor[2]);
   }
 
 
+  ////////////////////////////
 
-  //Startup functions
+  //INIT (PAGELOAD) FUNCTIONS GO HERE
+
   //1. pre-populate list of color names with appended RGB & HSL values
-  //2. draw circle on page
-
   initColorNames(colorNames);
-  drawCircle();
+
+  //2. obtain canvas height and width and draw circle on page
+  dynamicCircle();
+
+  ////////////////////////////
 
   //clicking on the label activates radio button
-  $('input ~ label').click(function() {
+  $('input ~ label').click(function () {
+    //activate radio button
     let labelID = $(this).attr('for');
-    $('#'+labelID).trigger('click');
-    $('#blurb').html(blurbs[labelID.substr(1)]);
+    $('#' + labelID).trigger('click');
+
+    //update blurb to match idx parsed from last char of attr
+    $('#blurb').html(blurbs[labelID.slice(-1)]);
+
+    //add active class to this button
+    $(this).prop("disabled", true);
   });
 
   // get hex color code on wheel click
-  $(canvas).on('mousedown touchstart', function(event) {
-    let canvasOffset = $(canvas).offset();
+  $(colorsCanvas).on('mousedown touchstart', function (event) {
+    let canvasOffset = $(colorsCanvas).offset();
     let canvasX = Math.floor(event.pageX - canvasOffset.left);
-    let canvasY = Math.floor(event.pageY - canvasOffset.top);  
-    let imageData = context.getImageData(canvasX, canvasY, 1, 1);
+    let canvasY = Math.floor(event.pageY - canvasOffset.top);
+    let imageData = colorsContext.getImageData(canvasX, canvasY, 1, 1);
     let pixelRGBA = imageData.data;
     let hexColor = rgb2hex(pixelRGBA[0], pixelRGBA[1], pixelRGBA[2]);
     hexColor = hexColor.toUpperCase();
 
-    //invisible middle circle is black so we don't want to pick that color up
+    // invisible middle circle is black so we don't want to pick that color up
     if (hexColor !== "#000000" && $('input[name=colorPicker]:checked').length > 0) {
+
+      // radio value is either"primary" or "secondary"
       let radioValue = $('input[name=colorPicker]:checked').val();
-      $("#" + radioValue + "-color").text(hex2name(hexColor));
-      $("#" + radioValue + "-color").css("color", "#000");
-      $("#" + radioValue + "-color").prev().css("background-color", hexColor);
+
+      // update button span elements where [0] is the dot [1] is the color name
+      let buttonSpans = $("#" + radioValue + "-color").find("button").children();
+      $(buttonSpans[1]).text(hex2name(hexColor));
+      $(buttonSpans[1]).css("color", "#000000");
+      $(buttonSpans[0]).css("background-color", hexColor);
+
+      // trigger a window resize event to redraw circle and prevent overlapping
+      $(window).trigger("resize");
+
       if (radioValue === "primary") {
         primaryColor = hexColor;
       } else {
@@ -170,16 +189,49 @@ $(function() {
     }
   });
 
-  $("#blend-button").on("click", function(event) {
+  //when the action button is clicked on
+  $("#action-button").on("click", function (event) {
+    //color blend: only if both have values other than black 
     if (primaryColor !== "#000000" && secondaryColor !== "#000000") {
+
       blendedColor = colorBlend(primaryColor, secondaryColor);
       blendedColor = blendedColor.toUpperCase();
+      //animate the color wheel and update DOM when animation ends
+      $("#picker-colors").addClass("rotate-wheel").one('animationend webkitAnimationEnd oAnimationEnd', function () {
+        $("#picker-colors").removeClass("rotate-wheel");
+        $.get("/result.html", function (data) {
+          document.body.style.background = blendedColor;
+          // .html() "callback" function for when DOM elements are done being loaded
+          $("main").html(data).promise().done(function () {
+            let blendButton = document.getElementById('blended-color');
+            let primaryButtonSpans = $("#primary-color").find("button").children();
+            let secondaryButtonSpans = $("#secondary-color").find("button").children();
 
-      $("#blended-color").text(hex2name(blendedColor));
-      $("#blended-color").css("color", "#000");
-      $("#blended-color").prev().css("background-color", blendedColor);
-    }
-    else {
+            /////////////////////////////////////////////////////////
+            // UPDATE MOOD NAME AND BLURB HERE
+            /////////////////////////////////////////////////////////
+
+            $("#mood").text(currentMood);
+            $("#blurb").text(moodBlurb);
+
+            /////////////////////////////////////////////////////////
+
+            $(primaryButtonSpans[1]).text(hex2name(primaryColor));
+            $(primaryButtonSpans[1]).css("color", "#000");
+            $(primaryButtonSpans[0]).css("background-color", primaryColor);
+
+            $(secondaryButtonSpans[1]).text(hex2name(secondaryColor));
+            $(secondaryButtonSpans[1]).css("color", "#000");
+            $(secondaryButtonSpans[0]).css("background-color", secondaryColor);
+
+            $(blendButton).text(hex2name(blendedColor));
+            $(blendButton).css("color", "#000");
+            $(blendButton).prev().css("background-color", blendedColor);
+          });
+        });
+      });
+    } else {
+      //alert user that two colors are needed for blend
       $('#blurb').html(blurbs[2]);
     }
   });
@@ -203,7 +255,7 @@ $(function() {
 function hsv2rgb(hue, saturation, value) {
   let chroma = value * saturation;
   let hue1 = hue / 60;
-  let x = chroma * (1- Math.abs((hue1 % 2) - 1));
+  let x = chroma * (1 - Math.abs((hue1 % 2) - 1));
   let r1, g1, b1;
   if (hue1 >= 0 && hue1 <= 1) {
     ([r1, g1, b1] = [chroma, x, 0]);
@@ -220,10 +272,10 @@ function hsv2rgb(hue, saturation, value) {
   }
 
   let m = value - chroma;
-  let [r,g,b] = [r1+m, g1+m, b1+m];
+  let [r, g, b] = [r1 + m, g1 + m, b1 + m];
 
   // Change r,g,b values from [0,1] to [0,255]
-  return [255*r,255*g,255*b];
+  return [255 * r, 255 * g, 255 * b];
 }
 
 function rgb2hex(r, g, b) {
@@ -233,7 +285,9 @@ function rgb2hex(r, g, b) {
 function hex2hsl(color) {
   var rgb = [parseInt('0x' + color.substring(1, 3)) / 255, parseInt('0x' + color.substring(3, 5)) / 255, parseInt('0x' + color.substring(5, 7)) / 255];
   var min, max, delta, h, s, l;
-  var r = rgb[0], g = rgb[1], b = rgb[2];
+  var r = rgb[0],
+    g = rgb[1],
+    b = rgb[2];
 
   min = Math.min(r, Math.min(g, b));
   max = Math.max(r, Math.max(g, b));
@@ -241,12 +295,11 @@ function hex2hsl(color) {
   l = (min + max) / 2;
 
   s = 0;
-  if(l > 0 && l < 1)
+  if (l > 0 && l < 1)
     s = delta / (l < 0.5 ? (2 * l) : (2 - 2 * l));
 
   h = 0;
-  if(delta > 0)
-  {
+  if (delta > 0) {
     if (max == r && max != g) h += (g - b) / delta;
     if (max == g && max != b) h += (2 + (b - r) / delta);
     if (max == b && max != r) h += (4 + (r - g) / delta);
@@ -256,25 +309,31 @@ function hex2hsl(color) {
 }
 
 function hex2rgb(color) {
-  return [parseInt('0x' + color.substring(1, 3)), parseInt('0x' + color.substring(3, 5)),  parseInt('0x' + color.substring(5, 7))];
+  return [parseInt('0x' + color.substring(1, 3)), parseInt('0x' + color.substring(3, 5)), parseInt('0x' + color.substring(5, 7))];
 }
 
 function hex2name(color) {
   let rgb = hex2rgb(color);
-  let r = rgb[0], g = rgb[1], b = rgb[2];
+  let r = rgb[0],
+    g = rgb[1],
+    b = rgb[2];
   let hsl = hex2hsl(color);
   //console.log("hsl: " + hsl);
-  let h = hsl[0], s = hsl[1], l = hsl[2];
-  let ndf1 = 0; ndf2 = 0; ndf = 0;
-  let cl = -1, df = -1;
+  let h = hsl[0],
+    s = hsl[1],
+    l = hsl[2];
+  let ndf1 = 0;
+  ndf2 = 0;
+  ndf = 0;
+  let cl = -1,
+    df = -1;
   //console.log("colorNames length: " + colorNames.length);
 
-  for(var i = 0; i < colorNames.length; i++)
-  {
+  for (var i = 0; i < colorNames.length; i++) {
     //console.log("at this pt color is: " + color);
     //console.log("colorNames[" + i + "].length: " + colorNames[i].length);
     //console.log("comparison with: " + "#" + colorNames[i][0]);
-    if(color == "#" + colorNames[i][0]) {
+    if (color == "#" + colorNames[i][0]) {
       //console.log("return value is: " + colorNames[i][1]);
       //console.log("i is: " + i);
       return colorNames[i][1];
@@ -283,8 +342,7 @@ function hex2name(color) {
     ndf1 = Math.pow(r - colorNames[i][2], 2) + Math.pow(g - colorNames[i][3], 2) + Math.pow(b - colorNames[i][4], 2);
     ndf2 = Math.pow(h - colorNames[i][5], 2) + Math.pow(s - colorNames[i][6], 2) + Math.pow(l - colorNames[i][7], 2);
     ndf = ndf1 + ndf2 * 2;
-    if(df < 0 || df > ndf)
-    {
+    if (df < 0 || df > ndf) {
       df = ndf;
       cl = i;
     }
@@ -292,8 +350,7 @@ function hex2name(color) {
 
   if (cl < 0) {
     return "Invalid";
-  }
-  else {
+  } else {
     //console.log("cl is: " + cl);
     return colorNames[cl][1];
   }
@@ -302,7 +359,7 @@ function hex2name(color) {
 var blurbs = [
   "Pick a <strong>primary color</strong> that represents how you’re feeling",
   "Pick a <strong>secondary color</span></strong> that represents how you’re feeling",
-  "<strong>Two colors</strong> are needed for blending."
+  "<strong>Two colors</strong> are needed for blending"
 ];
 
 var colorNames = [

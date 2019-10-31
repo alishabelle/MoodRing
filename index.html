@@ -1,79 +1,104 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>mr</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.1/pure-min.css'><link rel="stylesheet" href="./style.css">
-
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mood Ring</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div class='header'>
-  <nav class="home-menu pure-menu pure-menu-horizontal">
+  <!--NAVBAR-->
+  <nav class="container item">
     <a href="#">
-      <h1 class="logo pure-menu-heading">mood ring</h1>
+      <h1>mood ring</h1>
     </a>
   </nav>
-</div>
 
-<div class="splash-container">
-  <div class="splash">
+  <main>
 
-    <aside class="splash-subhead">
+    <!--BLURB-->
+    <div class="container item">
+      <p id="blurb">Pick <strong>two colors</strong> that represent how you’re feeling</p>
+    </div>
 
-      <p id="blurb">Pick <strong><span id="color-type">two colors</span></strong> that represent how you’re feeling</p>
+    <div class="container">
 
-      <input type="radio" name="colorPicker" value="primary" id="r0">
-      <label for="r0">
-        <button  id='primary-button' class='pure-button button-smol'>              
-          <span class='dot'></span>
-          <span id="primary-color">Primary</span>
-        </button>
-      </label>
+      <!--COLOR WHEEL (COLORS & CONTAINER)-->
+      <div class="item" id="picker">
+        <canvas id="picker-colors" width="400" height="400">
+        </canvas>
+        <canvas id="picker-border" width="400" height="400">
+        </canvas>
+      </div>
 
+      <!--PRIMARY COLOR BUTTON-->
+      <div class="item" id="primary-color">
+        <input type="radio" name="colorPicker" value="primary" id="radio-0">
+        <label for="radio-0">
+          <button class='button-smol'>
+            <span class='dot'></span>
+            <span>Primary</span>
+          </button>
+        </label>
+      </div>
 
-      <input type="radio" name="colorPicker" value="secondary" id="r1">
-      <label for="r1">
-        <button class='pure-button button-smol'>
-          <span class='dot'></span>
-          <span id='secondary-color'>Secondary</span>
-        </button>
-      </label>
+      <!--SECONDARY COLOR BUTTON-->
+      <div class="item" id="secondary-color">
+        <input type="radio" name="colorPicker" value="secondary" id="radio-1">
+        <label for="radio-1">
+          <button class='button-smol'>
+            <span class='dot'></span>
+            <span>Secondary</span>
+          </button>
+        </label>
+      </div>
 
-      <button class='pure-button button-smol'>
+    </div>
+
+    <!--BLENDED COLOR PREVIEW (FOR TESTING DELETE LATER)
+    <div class="container item">
+      <button class='button-smol'>
         <span class='dot'></span>
         <span id='blended-color'>Result</span>
       </button>
+    </div>-->
 
-      <button id='blend-button' class='pure-button button-yuge'>Blend</button>
-
-    </aside>
-
-    <main>
-      <canvas id="picker" width="400" height="400">
-      </canvas>
-      <canvas id="picker-container" width="400" height="400">
-      </canvas>
-    </main>
-    
-  </div>
-  <div class="background-circles">
-        <ul class="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
+    <!--ACTION BUTTON NEXT->BLEND-->
+    <div class='container item'>
+      <button id='action-button' class='button-yuge'>
+        <span>Blend</span>
+      </button>
     </div>
-</div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script><script  src="./script.js"></script>
+
+    <!--HELP BUTTON-->
+    <div class="container item">
+      <a href="#" id="help-button">
+        <h5>Help</h5>
+      </a>
+    </div>
+
+  </main>
+
+  <!--ANIMATED BACKGROUND AREA-->
+  <ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  <!--IMPORTING SCRIPTS-->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src="./script.js"></script>
 
 </body>
+
 </html>
