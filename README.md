@@ -10,16 +10,16 @@ Moodring is a web application. Type the url "moodring.cc" in your browser to acc
 
 To access the website you must have an internet or wi fi connection and be on the internet. Your browser must be able to run JavaScript.
 
-[Screen Shot 20191106 at 53800 PMpng]:(https://imgur.com/vsip85q)
+![alt text](https://i.imgur.com/vsip85q.png)
 
 Press the primary button, then a color from the color ring. Next press the secondary button, then choose another color from the color ring. Choose colors based on your current mood. Click the blend button.
 
-![Screen Shot 20191107 at 42517 PMpng](/Users/MDragon/Dropbox/HOLBERTON/MoodRing/images/Screen Shot 2019-11-07 at 4.25.17 PM.png)
+![alt text](https://i.imgur.com/fJLJ2NM.png)
+
 
 Your blended color appears. Now click the "Tell me my color mood" button.
 
-![Screen Shot 20191107 at 44458 PM copypng](/Users/MDragon/Dropbox/HOLBERTON/MoodRing/images/Screen Shot 2019-11-07 at 4.44.58 PM copy.png)
-
+![alt text](https://i.imgur.com/BVn4RcI.png)
 The mood that corresponds with your blended color appears at the top of the page.
 
 ## Running Tests
@@ -28,33 +28,31 @@ MAMP was used to run test locally. Mamp provided us with a local server to test 
 
 ## Deployment
 
-Deployed via Hostinger.![](file:///Users/MDragon/Library/Application Support/marktext/images/2019-11-07-22-23-31-image.png)
+Deployed via Hostinger.
 
 ## Built With
 
 JavaScript
 
-****
+![alt text](https://i.imgur.com/SLsiAv5.png)
 
 HTML
 
-![](file:///Users/MDragon/Library/Application Support/marktext/images/2019-11-07-22-30-53-image.png)
-
+![alt text](https://i.imgur.com/R26CCvZ.png)
 CSS
 
-![](file:///Users/MDragon/Library/Application Support/marktext/images/2019-11-07-22-32-14-image.png)
-
+![alt text](https://i.imgur.com/RachF2h.png)
 SQL
 
-![](file:///Users/MDragon/Library/Application Support/marktext/images/2019-11-07-22-37-45-image.png)
+![alt text](https://i.imgur.com/uOkqKVz.png)
 
 PhpmyAdmin
 
-![](file:///Users/MDragon/Library/Application Support/marktext/images/2019-11-07-23-00-04-image.png)
+![alt text](https://i.imgur.com/5TZgJ0b.png)
 
 Ajax
 
-![](file:///Users/MDragon/Library/Application Support/marktext/images/2019-11-07-22-39-54-image.png)
+![alt text](https://i.imgur.com/ao54ix7.png)
 
 ### Authors
 
