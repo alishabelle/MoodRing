@@ -39,9 +39,11 @@ JavaScript
 HTML
 
 ![alt text](https://i.imgur.com/R26CCvZ.png)
+
 CSS
 
 ![alt text](https://i.imgur.com/RachF2h.png)
+
 SQL
 
 ![alt text](https://i.imgur.com/uOkqKVz.png)
