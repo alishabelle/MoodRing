@@ -10,7 +10,7 @@ Moodring is a web application. Type the url "moodring.cc" in your browser to acc
 
 To access the website you must have an internet or wi fi connection and be on the internet. Your browser must be able to run JavaScript.
 
-![Screen Shot 20191106 at 53800 PMpng](/Users/MDragon/Dropbox/HOLBERTON/MoodRing/images/Screen Shot 2019-11-06 at 5.38.00 PM.png)
+[Screen Shot 20191106 at 53800 PMpng](https://imgur.com/vsip85q)
 
 Press the primary button, then a color from the color ring. Next press the secondary button, then choose another color from the color ring. Choose colors based on your current mood. Click the blend button.
 
