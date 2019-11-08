@@ -60,7 +60,8 @@ Ajax
 
 Alisha Smith - *Project manager*, Front-end Designer    alishabelle@github.com
 
-    Jonathan Vasquez - UI/UX Designer, Front-end Designer    jxvo@github.com
- Mia L.Morton - Content Specialist, Back-end Designer   DracoMindz@github.com
+Jonathan Vasquez - UI/UX Designer, Front-end Designer    jxvo@github.com
+ 
+Mia L.Morton - Content Specialist, Back-end Designer   DracoMindz@github.com
 
 Contributers: Cohort 8 Holberton School, New Haven, CT
