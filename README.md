@@ -1,10 +1,10 @@
 # MoodRing
 
-Moodring combines two chosen colors giving you the color blend and the mood of that blend; based on accumulated pyschological data.
+MoodRing allows users to chose two colors on the color wheel. Those colors are then blended together and a mood is generated based off that color blend and based on accumulated psychological data. MoodRing was developed as an interactive nostalgic inducing web app to take you back to the good old days and memories of buying mood rings in candy stores.
 
 ## Getting Started
 
-Moodring is a web application. Type the url "moodring.cc" in your browser to access the website. Once on the web site follow the instructions. Choose two colors: click a button, drag the cursor to the wheel, chose a color. Repeat the previous instructions to choose the second color. make sure you have chosen the colors you want, based on your current mood. Click the "blend" button. A color blend based on the colors you chose will appear. The mood of that color whill apear as well.
+Moodring is a web application. Type the url "moodring.cc" in your browser to access the website. Once on the web site follow the instructions. Choose two colors: click a button (primary or secondary), move your cursor over to the wheel and select a color.Repeat the previous instructions to choose the second color. Make sure the colors chosen are based on your current mood or how you feel. Click the "blend" button. A color blend based on the colors you chose will appear. Click the "Tell Me My Mood" button and the mood of that color blend will apear as well.
 
 ### Prerequisites
 
