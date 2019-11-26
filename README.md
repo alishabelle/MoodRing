@@ -22,6 +22,8 @@ Your blended color appears. Now click the "Tell me my color mood" button.
 ![alt text](https://i.imgur.com/BVn4RcI.png)
 The mood that corresponds with your blended color appears at the top of the page.
 
+![](mood.gif)
+
 ## Running Tests
 
 MAMP was used to run test locally. Mamp provided us with a local server to test the webpage and the server connecticity locally before deploying webpage on the web.
