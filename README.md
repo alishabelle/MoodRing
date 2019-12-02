@@ -60,7 +60,7 @@ Ajax
 
 ### Authors
 
-Alisha Smith - *Project manager*, Front-end Designer    alishabelle@github.com
+Alisha Smith - *Project manager*, Front-end Designer    [Alisha Smith](https://github.com/alishabelle) | [Linkedin](https://www.linkedin.com/in/alishabelle)
 
 Jonathan Vasquez - UI/UX Designer, Front-end Designer    jxvo@github.com
  
